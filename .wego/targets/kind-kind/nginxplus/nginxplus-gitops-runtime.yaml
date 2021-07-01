@@ -1,0 +1,29 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: GitRepository
+metadata:
+  name: nginxplus
+  namespace: wego-system
+spec:
+  interval: 30s
+  ref:
+    branch: main
+  secretRef:
+    name: weave-gitops-kind-kind-nginx3
+  url: ssh://git@github.com/jrryjcksn/nginx3.git
+
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: nginxplus
+  namespace: wego-system
+spec:
+  interval: 1m0s
+  path: ./app2
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: nginxplus
+  validation: client
+
