@@ -1,0 +1,14 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: GitRepository
+metadata:
+  name: app1
+  namespace: wego-system
+spec:
+  interval: 30s
+  ref:
+    branch: main
+  secretRef:
+    name: weave-gitops-kind-kind-nginx3
+  url: ssh://git@github.com/jrryjcksn/nginx3.git
+
